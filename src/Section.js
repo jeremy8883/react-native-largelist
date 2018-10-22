@@ -8,7 +8,7 @@
  */
 
 import React from "react";
-import { StyleSheet, View, Animated } from "react-native";
+import { StyleSheet, View, Animated, Platform } from "react-native";
 import type { SectionPropType } from "./Types";
 
 export class Section extends React.Component<SectionPropType> {
@@ -49,7 +49,9 @@ export class Section extends React.Component<SectionPropType> {
       {
         top: top,
         height: heightForSection(index),
-        transform: [
+        // Turn off the sticky section header for android only. There's a 1 pixel keyline, and
+        // it jitters while scrolling. Not worth the effort to fix properly.
+        transform: Platform.OS === 'android' ? undefined : [
           {
             translateY: nativeOffset.interpolate({
               inputRange: inputRange,
