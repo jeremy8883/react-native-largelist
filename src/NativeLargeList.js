@@ -243,7 +243,7 @@ export class NativeLargeList extends React.PureComponent<LargeListPropType> {
     );
     idx(() => this._sectionContainer.current.updateOffset(offset.y));
     return new Promise((r, j) => {
-      this._scrollView.current.getNode().scrollTo(offset, animated);
+      this._scrollView.current.getNode().scrollTo({ ...offset, animated });
 
       setTimeout(() => {
         r();
